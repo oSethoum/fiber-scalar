@@ -1,6 +1,6 @@
 # fiber-scalar
 
-A simple scalar handler middleware for [Go Fiber v2](https://github.com/gofiber/fiber).
+A simple scalar handler for [Go Fiber v2](https://github.com/gofiber/fiber).
 
 ## Features
 
