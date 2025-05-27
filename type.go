@@ -27,6 +27,7 @@ const (
 type Options struct {
 	CDN                string      `json:"cdn,omitempty"`
 	PageTitle          string      `json:"pageTitle"`
+	SpecFile           string      `json:"specFile,omitempty"`
 	SpecURL            string      `json:"specUrl,omitempty"` // allow external URL ou local path file
 	SpecContent        interface{} `json:"specContent,omitempty"`
 	Layout             Layout      `json:"layout"`

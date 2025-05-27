@@ -3,6 +3,7 @@ package scalar
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	s "github.com/MarceloPetrucio/go-scalar-api-reference"
 	"github.com/gofiber/fiber/v2"
@@ -10,7 +11,7 @@ import (
 )
 
 func Handler(options *Options) fiber.Handler {
-	// initialize options
+
 	op := &Options{}
 
 	if options != nil {
@@ -23,6 +24,13 @@ func Handler(options *Options) fiber.Handler {
 
 	if op.Theme == "" {
 		op.Theme = ThemeDefault
+	}
+
+	if op.SpecFile != "" {
+		data, err := os.ReadFile(op.SpecFile)
+		if err == nil {
+			op.SpecContent = string(data)
+		}
 	}
 
 	sop := &s.Options{
