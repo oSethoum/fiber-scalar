@@ -9,13 +9,13 @@ A simple scalar handler middleware for [Go Fiber v2](https://github.com/gofiber/
 ## Installation
 
 ```bash
-go get github.com/osethoum/fiber-scalar
+go get github.com/oSethoum/fiber-scalar
 ```
 
 ## Usage
 
 ```go
-import scalar "github.com/osethoum/fiber-scalar"
+import scalar "github.com/oSethoum/fiber-scalar"
 ```
 
 ### Example
@@ -25,7 +25,7 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
-	scalar "github.com/osethoum/fiber-scalar"
+	scalar "github.com/oSethoum/fiber-scalar"
 )
 
 func main() {

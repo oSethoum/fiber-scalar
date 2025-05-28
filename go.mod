@@ -1,4 +1,4 @@
-module github.com/osethoum/fiber-scalar
+module github.com/oSethoum/fiber-scalar
 
 go 1.24.2
 
