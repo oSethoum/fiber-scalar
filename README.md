@@ -1,6 +1,6 @@
 # fiber-scalar
 
-A simple scalar handler for [Go Fiber v3](https://github.com/gofiber/fiber).
+A simple scalar handler for [Go Fiber](https://github.com/gofiber/fiber).
 
 ## Features
 
@@ -18,7 +18,7 @@ go get github.com/oSethoum/fiber-scalar
 import scalar "github.com/oSethoum/fiber-scalar"
 ```
 
-### Example
+### Example usage with Fiber v3
 
 ```go
 package main
@@ -32,6 +32,31 @@ func main() {
     app := fiber.New()
 
     app.Get("/docs", scalar.Handler(&scalar.Options{
+            SpecFile: "./docs/swagger.json",
+            Layout:   scalar.LayoutClassic,
+            Theme:    scalar.ThemeSolarized,
+            DarkMode: true,
+            // other options can go here
+        }))
+
+    app.Listen(":5000")
+}
+```
+
+### Example usage with Fiber v2
+
+```go
+package main
+
+import (
+	"github.com/gofiber/fiber/v2"
+	scalar "github.com/oSethoum/fiber-scalar"
+)
+
+func main() {
+    app := fiber.New()
+
+    app.Get("/docs", scalar.FiberHandler(&scalar.Options{
             SpecFile: "./docs/swagger.json",
             Layout:   scalar.LayoutClassic,
             Theme:    scalar.ThemeSolarized,
