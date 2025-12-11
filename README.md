@@ -1,10 +1,10 @@
 # fiber-scalar
 
-A simple scalar handler for [Go Fiber v2](https://github.com/gofiber/fiber).
+A simple scalar handler for [Go Fiber v3](https://github.com/gofiber/fiber).
 
 ## Features
 
--   Serves the swagger docs of your API in scalar fashion
+- Serves the swagger docs of your API in scalar fashion
 
 ## Installation
 
@@ -24,7 +24,7 @@ import scalar "github.com/oSethoum/fiber-scalar"
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v3"
 	scalar "github.com/oSethoum/fiber-scalar"
 )
 

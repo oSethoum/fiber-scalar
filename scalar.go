@@ -10,8 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/adaptor"
 )
 
-func Handler(options *Options) fiber.Handler {
-
+func initOptions(options *Options) *s.Options {
 	op := &Options{}
 
 	if options != nil {
@@ -61,6 +60,13 @@ func Handler(options *Options) fiber.Handler {
 		}
 	}
 
+	return sop
+}
+
+// Handler returns an http.HandlerFunc that can be used with both
+// the Fiber V2
+func FiberHandler(options *Options) fiber.Handler {
+	sop := initOptions(options)
 	return adaptor.HTTPHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		htmlContent, err := s.ApiReferenceHTML(sop)
 
@@ -70,4 +76,19 @@ func Handler(options *Options) fiber.Handler {
 
 		fmt.Fprintln(w, htmlContent)
 	}))
+}
+
+// Handler returns an http.HandlerFunc that can be used with both
+// the Fiber v3 framework and the standard Go http package.
+func Handler(options *Options) func(w http.ResponseWriter, r *http.Request) {
+	sop := initOptions(options)
+	return func(w http.ResponseWriter, r *http.Request) {
+		htmlContent, err := s.ApiReferenceHTML(sop)
+
+		if err != nil {
+			fmt.Printf("%v", err)
+		}
+
+		fmt.Fprintln(w, htmlContent)
+	}
 }
