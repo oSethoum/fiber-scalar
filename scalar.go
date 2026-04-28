@@ -6,8 +6,8 @@ import (
 	"os"
 
 	s "github.com/MarceloPetrucio/go-scalar-api-reference"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/adaptor"
+	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/adaptor"
 )
 
 func initOptions(options *Options) *s.Options {
@@ -64,21 +64,6 @@ func initOptions(options *Options) *s.Options {
 }
 
 // Handler returns an http.HandlerFunc that can be used with both
-// the Fiber V2
-func FiberHandler(options *Options) fiber.Handler {
-	sop := initOptions(options)
-	return adaptor.HTTPHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		htmlContent, err := s.ApiReferenceHTML(sop)
-
-		if err != nil {
-			fmt.Printf("%v", err)
-		}
-
-		fmt.Fprintln(w, htmlContent)
-	}))
-}
-
-// Handler returns an http.HandlerFunc that can be used with both
 // the Fiber v3 framework and the standard Go http package.
 func Handler(options *Options) func(w http.ResponseWriter, r *http.Request) {
 	sop := initOptions(options)
@@ -91,4 +76,9 @@ func Handler(options *Options) func(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Fprintln(w, htmlContent)
 	}
+}
+
+// Handler returns an http.HandlerFunc that can be used with both
+func FiberHandler(options *Options) fiber.Handler {
+	return adaptor.HTTPHandler(http.HandlerFunc(Handler(options)))
 }
