@@ -33,17 +33,13 @@ func initOptions(options *Options) *s.Options {
 		}
 	}
 
-	if op.SpecURL == "" && op.SpecContent == "" {
-		specs, err := swag.ReadDoc()
-		if err != nil {
-			panic("no swagger docs found, please provide a valid spec file or URL")
-		}
-		op.SpecContent = specs
+	if spec, err := swag.ReadDoc(); err == nil {
+		op.SpecContent = spec
 	}
 
 	sop := &s.Options{
 		SpecURL:            op.SpecURL,
-		SpecContent:        options.SpecContent,
+		SpecContent:        op.SpecContent,
 		Theme:              s.ThemeId(op.Theme),
 		Layout:             s.ReferenceLayoutType(options.Layout),
 		CDN:                op.CDN,
