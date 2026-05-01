@@ -8,6 +8,7 @@ import (
 	s "github.com/MarceloPetrucio/go-scalar-api-reference"
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/adaptor"
+	"github.com/swaggo/swag"
 )
 
 func initOptions(options *Options) *s.Options {
@@ -30,6 +31,14 @@ func initOptions(options *Options) *s.Options {
 		if err == nil {
 			op.SpecContent = string(data)
 		}
+	}
+
+	if op.SpecURL == "" && op.SpecContent == "" {
+		specs, err := swag.ReadDoc()
+		if err != nil {
+			panic("no swagger docs found, please provide a valid spec file or URL")
+		}
+		op.SpecContent = specs
 	}
 
 	sop := &s.Options{
